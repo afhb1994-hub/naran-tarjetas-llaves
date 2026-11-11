@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NARAN COLOMBIA | Operaciones</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --green: #55b82f;
+      --green-light: #a8ef4f;
+      --black: #17191a;
+      --dark: #101213;
+      --white: #ffffff;
+      --gray-bg: #f5f7f9;
+      --gray: #667085;
+      --border: #e4e7ec;
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--gray-bg);
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* ================================
+       HEADER
+    ================================= */
+
+    .topbar {
+      height: 76px;
+      background: var(--black);
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 30px;
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .brand-text h1 {
+      font-size: 19px;
+      letter-spacing: 1px;
+    }
+
+    .brand-text span {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: #aeb3b8;
+    }
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-info {
+      text-align: right;
+    }
+
+    .user-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .user-role {
+      color: var(--green-light);
+      font-size: 11px;
+      margin-top: 3px;
+      letter-spacing: 1px;
+    }
+
+    .logout-btn {
+      border: 1px solid rgba(255,255,255,.25);
+      background: transparent;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* ================================
+       CONTENIDO
+    ================================= */
+
+    .container {
+      padding: 30px;
+      max-width: 1600px;
+      margin: auto;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 25px;
+    }
+
+    .page-title h2 {
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+    .page-title p {
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    .live-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      padding: 10px 15px;
+
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 4px rgba(85,184,47,.12);
+    }
+
+    /* ================================
+       TARJETAS RESUMEN
+    ================================= */
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .summary-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+
+      box-shadow: 0 4px 15px rgba(0,0,0,.04);
+    }
+
+    .summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-label {
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .summary-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #f0fdf4;
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .summary-number {
+      font-size: 31px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    /* ================================
+       BOTÓN SONIDO
+    ================================= */
+
+    .sound-bar {
+      background: var(--black);
+      color: white;
+
+      border-radius: 15px;
+
+      padding: 15px 20px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 25px;
+    }
+
+    .sound-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sound-text strong {
+      font-size: 14px;
+    }
+
+    .sound-text span {
+      color: #b7bec6;
+      font-size: 12px;
+    }
+
+    .sound-btn {
+      border: none;
+      background: var(--green);
+      color: white;
+
+      padding: 10px 17px;
+      border-radius: 9px;
+
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ================================
+       KANBAN
+    ================================= */
+
+    .kanban {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(240px, 1fr));
+      gap: 15px;
+
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .column {
+      background: #eef1f4;
+      border-radius: 15px;
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .column-header {
+      padding: 16px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .column-title {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .column-count {
+      min-width: 25px;
+      height: 25px;
+
+      padding: 0 7px;
+
+      border-radius: 20px;
+
+      background: var(--black);
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .column-body {
+      padding: 12px;
+      min-height: 370px;
+    }
+
+    /* ================================
+       COLORES COLUMNAS
+    ================================= */
+
+    .column.pending .column-count {
+      background: var(--orange);
+    }
+
+    .column.process .column-count {
+      background: var(--blue);
+    }
+
+    .column.delivered .column-count {
+      background: var(--purple);
+    }
+
+    .column.returned .column-count {
+      background: #0f766e;
+    }
+
+    .column.finished .column-count {
+      background: var(--green);
+    }
+
+    /* ================================
+       SOLICITUD
+    ================================= */
+
+    .request-card {
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      padding: 16px;
+
+      margin-bottom: 12px;
+
+      box-shadow: 0 4px 12px rgba(0,0,0,.04);
+
+      transition: .2s;
+    }
+
+    .request-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .request-plate {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .request-commercial {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 7px;
+    }
+
+    .request-date {
+      font-size: 12px;
+      color: #475467;
+      margin-bottom: 12px;
+    }
+
+    .request-status {
+      display: inline-block;
+
+      padding: 5px 9px;
+
+      border-radius: 20px;
+
+      background: #f2f4f7;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .request-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 13px;
+    }
+
+    .action-btn {
+      border: none;
+      border-radius: 8px;
+
+      padding: 9px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+    .btn-process {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .btn-deliver {
+      background: #f5f3ff;
+      color: #7c3aed;
+    }
+
+    .btn-return {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .btn-finish {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 45px 15px;
+      color: #98a2b3;
+      font-size: 12px;
+    }
+
+    /* ================================
+       RESPONSIVE
+    ================================= */
+
+    @media (max-width: 1200px) {
+
+      .summary {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .kanban {
+        grid-template-columns: repeat(5, 260px);
+      }
+
+    }
+
+    @media (max-width: 700px) {
+
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .user-info {
+        display: none;
+      }
+
+      .container {
+        padding: 20px 15px;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-header {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ================================
+       HEADER
+  ================================= -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <img src="logo.png" alt="NARAN">
+
+      <div class="brand-text">
+
+        <h1>NARAN COLOMBIA</h1>
+
+        <span>TARJETAS Y LLAVES</span>
+
+      </div>
+
+    </div>
+
+
+    <div class="user-area">
+
+      <div class="user-info">
+
+        <div
+          class="user-name"
+          id="userName"
+        >
+          Cargando...
+        </div>
+
+        <div
+          class="user-role"
+          id="userRole"
+        >
+          OPERACIONES
+        </div>
+
+      </div>
+
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+      >
+        Cerrar sesión
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================================
+       CONTENIDO
+  ================================= -->
+
+  <main class="container">
+
+
+    <div class="page-header">
+
+      <div class="page-title">
+
+        <h2>Tarjetas y Llaves</h2>
+
+        <p>
+          Control de solicitudes y entrega de documentación
+        </p>
+
+      </div>
+
+
+      <div class="live-status">
+
+        <span class="live-dot"></span>
+
+        <span>
+          Actualización en tiempo real
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================
+         RESUMEN
+    ================================= -->
+
+    <section class="summary">
+
+
+      <div class="summary-card">
+
+        <div class="summary-top">
+
+          <span class="summary-label">
+            PENDIENTES
+          </span>
+
+          <div class="summary-icon">
+            P
+          </div>
+
+        </div>
+
+        <div
+          class="summary-number"
+          id="countPending"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-top">
+
+          <span class="summary-label">
+            EN PROCESO
+          </span>
+
+          <div class="summary-icon">
+            E
+          </div>
+
+        </div>
+
+        <div
+          class="summary-number"
+          id="countProcess"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-top">
+
+          <span class="summary-label">
+            ENTREGADOS
+          </span>
+
+          <div class="summary-icon">
+            C
+          </div>
+
+        </div>
+
+        <div
+          class="summary-number"
+          id="countDelivered"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-top">
+
+          <span class="summary-label">
+            DEVUELTOS
+          </span>
+
+          <div class="summary-icon">
+            D
+          </div>
+
+        </div>
+
+        <div
+          class="summary-number"
+          id="countReturned"
+        >
+          0
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-top">
+
+          <span class="summary-label">
+            FINALIZADOS
+          </span>
+
+          <div class="summary-icon">
+            ✓
+          </div>
+
+        </div>
+
+        <div
+          class="summary-number"
+          id="countFinished"
+        >
+          0
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- ================================
+         SONIDO
+    ================================= -->
+
+    <section class="sound-bar">
+
+      <div class="sound-text">
+
+        <span style="font-size:22px;">
+          🔔
+        </span>
+
+        <div>
+
+          <strong>
+            Notificaciones de nuevas solicitudes
+          </strong>
+
+          <br>
+
+          <span id="soundStatus">
+            Sonido desactivado
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="sound-btn"
+        id="soundBtn"
+      >
+        Activar sonido
+      </button>
+
+    </section>
+
+
+    <!-- ================================
+         KANBAN
+    ================================= -->
+
+    <section class="kanban">
+
+
+      <!-- PENDIENTE -->
+
+      <div class="column pending">
+
+        <div class="column-header">
+
+          <span class="column-title">
+            PENDIENTE
+          </span>
+
+          <span
+            class="column-count"
+            id="kanbanPending"
+          >
+            0
+          </span>
+
+        </div>
+
+        <div
+          class="column-body"
+          id="pendingColumn"
+        >
+
+          <div class="empty">
+            No hay solicitudes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- EN PROCESO -->
+
+      <div class="column process">
+
+        <div class="column-header">
+
+          <span class="column-title">
+            EN PROCESO
+          </span>
+
+          <span
+            class="column-count"
+            id="kanbanProcess"
+          >
+            0
+          </span>
+
+        </div>
+
+        <div
+          class="column-body"
+          id="processColumn"
+        >
+
+          <div class="empty">
+            No hay solicitudes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ENTREGADO -->
+
+      <div class="column delivered">
+
+        <div class="column-header">
+
+          <span class="column-title">
+            ENTREGADO A COMERCIAL
+          </span>
+
+          <span
+            class="column-count"
+            id="kanbanDelivered"
+          >
+            0
+          </span>
+
+        </div>
+
+        <div
+          class="column-body"
+          id="deliveredColumn"
+        >
+
+          <div class="empty">
+            No hay solicitudes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- DEVUELTO -->
+
+      <div class="column returned">
+
+        <div class="column-header">
+
+          <span class="column-title">
+            COMERCIAL DEVOLVIÓ
+          </span>
+
+          <span
+            class="column-count"
+            id="kanbanReturned"
+          >
+            0
+          </span>
+
+        </div>
+
+        <div
+          class="column-body"
+          id="returnedColumn"
+        >
+
+          <div class="empty">
+            No hay solicitudes
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FINALIZADO -->
+
+      <div class="column finished">
+
+        <div class="column-header">
+
+          <span class="column-title">
+            FINALIZADO
+          </span>
+
+          <span
+            class="column-count"
+            id="kanbanFinished"
+          >
+            0
+          </span>
+
+        </div>
+
+        <div
+          class="column-body"
+          id="finishedColumn"
+        >
+
+          <div class="empty">
+            No hay solicitudes
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+  </main>
+
+
+<script type="module">
+
+  // ==========================================
+  // FIREBASE
+  // ==========================================
+
+  import {
+    initializeApp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+  import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    onSnapshot,
+    updateDoc,
+    doc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+  // ==========================================
+  // CONFIGURACIÓN
+  // ==========================================
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvDgdjlLhLvkQRIB8vCdY_7q1lu3Bo0Fs",
+    authDomain: "naran-colombia.firebaseapp.com",
+    projectId: "naran-colombia",
+    storageBucket: "naran-colombia.firebasestorage.app",
+    messagingSenderId: "1065998017083",
+    appId: "1:1065998017083:web:b7a2081356f7aed01db21e",
+    measurementId: "G-Y4DDJXRHMG"
+  };
+
+
+  // ==========================================
+  // INICIALIZAR
+  // ==========================================
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+
+  // ==========================================
+  // ELEMENTOS
+  // ==========================================
+
+  const userName =
+    document.getElementById("userName");
+
+  const userRole =
+    document.getElementById("userRole");
+
+  const logoutBtn =
+    document.getElementById("logoutBtn");
+
+  const soundBtn =
+    document.getElementById("soundBtn");
+
+  const soundStatus =
+    document.getElementById("soundStatus");
+
+
+  // ==========================================
+  // ESTADO
+  // ==========================================
+
+  let soundEnabled = false;
+
+  let firstLoad = true;
+
+
+  // ==========================================
+  // SONIDO
+  // ==========================================
+
+  let audioContext = null;
+
+
+  function playNotificationSound() {
+
+    if (!soundEnabled) {
+      return;
+    }
+
+    try {
+
+      if (!audioContext) {
+
+        audioContext =
+          new (
+            window.AudioContext ||
+            window.webkitAudioContext
+          )();
+
+      }
+
+      const oscillator =
+        audioContext.createOscillator();
+
+      const gain =
+        audioContext.createGain();
+
+      oscillator.type = "sine";
+
+      oscillator.frequency.setValueAtTime(
+        880,
+        audioContext.currentTime
+      );
+
+      oscillator.frequency.exponentialRampToValueAtTime(
+        1200,
+        audioContext.currentTime + 0.15
+      );
+
+      gain.gain.setValueAtTime(
+        0.0001,
+        audioContext.currentTime
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.25,
+        audioContext.currentTime + 0.02
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioContext.currentTime + 0.35
+      );
+
+      oscillator.connect(gain);
+
+      gain.connect(audioContext.destination);
+
+      oscillator.start();
+
+      oscillator.stop(
+        audioContext.currentTime + 0.35
+      );
+
+    } catch (error) {
+
+      console.error(
+        "Error reproduciendo sonido:",
+        error
+      );
+
+    }
+
+  }
+
+
+  soundBtn.addEventListener(
+    "click",
+    async () => {
+
+      soundEnabled = !soundEnabled;
+
+      if (soundEnabled) {
+
+        try {
+
+          audioContext =
+            new (
+              window.AudioContext ||
+              window.webkitAudioContext
+            )();
+
+          await audioContext.resume();
+
+          playNotificationSound();
+
+        } catch (error) {
+
+          console.error(error);
+
+        }
+
+        soundBtn.textContent =
+          "Sonido activado";
+
+        soundStatus.textContent =
+          "Recibirás una alerta cuando llegue una nueva solicitud";
+
+      } else {
+
+        soundBtn.textContent =
+          "Activar sonido";
+
+        soundStatus.textContent =
+          "Sonido desactivado";
+
+      }
+
+    }
+  );
+
+
+  // ==========================================
+  // FORMATO DE FECHA
+  // ==========================================
+
+  function formatDate(value) {
+
+    if (!value) {
+      return "Sin fecha";
+    }
+
+    let date;
+
+    if (
+      value &&
+      typeof value.toDate === "function"
+    ) {
+
+      date = value.toDate();
+
+    } else if (
+      value instanceof Date
+    ) {
+
+      date = value;
+
+    } else {
+
+      date = new Date(value);
+
+    }
+
+    if (isNaN(date.getTime())) {
+      return "Sin fecha";
+    }
+
+    return date.toLocaleString(
+      "es-CO",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    );
+
+  }
+
+
+  // ==========================================
+  // NORMALIZAR SOLICITUD
+  // ==========================================
+
+  function normalizeRequest(
+    documentSnapshot
+  ) {
+
+    const data =
+      documentSnapshot.data();
+
+
+    /*
+      Soportamos tanto los nombres
+      nuevos en minúscula como los
+      datos de prueba anteriores.
+    */
+
+    return {
+
+      id:
+        documentSnapshot.id,
+
+      placa:
+        data.placa ||
+        data.Placa ||
+        data.PLACA ||
+        "",
+
+      comercial:
+        data.comercial ||
+        data.Comercial ||
+        data.COMERCIAL ||
+        "",
+
+      fechaEntrega:
+        data.fechaEntrega ||
+        data.FechaEntrega ||
+        "",
+
+      fechaRegistro:
+        data.fechaRegistro ||
+        data.FechaRegistro ||
+        "",
+
+      estado:
+        data.estado ||
+        data.Estado ||
+        "PENDIENTE",
+
+      responsableOperaciones:
+        data.responsableOperaciones ||
+        data.ResponsableOperaciones ||
+        "",
+
+      inicioEnProceso:
+        data.inicioEnProceso ||
+        null,
+
+      entregaAComercial:
+        data.entregaAComercial ||
+        null,
+
+      responsableEntrega:
+        data.responsableEntrega ||
+        "",
+
+      fechaDevolucion:
+        data.fechaDevolucion ||
+        null,
+
+      responsableDevolucion:
+        data.responsableDevolucion ||
+        ""
+
+    };
+
+  }
+
+
+  // ==========================================
+  // CREAR TARJETA
+  // ==========================================
+
+  function createRequestCard(request) {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "request-card";
+
+
+    card.innerHTML = `
+
+      <div class="request-plate">
+        ${escapeHtml(request.placa)}
+      </div>
+
+      <div class="request-commercial">
+        👤 ${escapeHtml(request.comercial)}
+      </div>
+
+      <div class="request-date">
+        📅 Entrega:
+        ${formatDate(request.fechaEntrega)}
+      </div>
+
+      <div class="request-date">
+        🕐 Registro:
+        ${formatDate(request.fechaRegistro)}
+      </div>
+
+      ${
+        request.responsableOperaciones
+          ? `
+            <div class="request-date">
+              👨‍💼 Responsable:
+              ${escapeHtml(
+                request.responsableOperaciones
+              )}
+            </div>
+          `
+          : ""
+      }
+
+      <div class="request-status">
+        ${escapeHtml(request.estado)}
+      </div>
+
+      <div
+        class="request-actions"
+      ></div>
+
+    `;
+
+
+    const actions =
+      card.querySelector(
+        ".request-actions"
+      );
+
+
+    // --------------------------------------
+    // PENDIENTE
+    // --------------------------------------
+
+    if (
+      request.estado === "PENDIENTE"
+    ) {
+
+      actions.appendChild(
+        createActionButton(
+          "Iniciar proceso",
+          "btn-process",
+          () =>
+            changeStatus(
+              request,
+              "EN PROCESO"
+            )
+        )
+      );
+
+    }
+
+
+    // --------------------------------------
+    // EN PROCESO
+    // --------------------------------------
+
+    if (
+      request.estado === "EN PROCESO"
+    ) {
+
+      actions.appendChild(
+        createActionButton(
+          "Entregar a comercial",
+          "btn-deliver",
+          () =>
+            changeStatus(
+              request,
+              "ENTREGADO A COMERCIAL"
+            )
+        )
+      );
+
+    }
+
+
+    // --------------------------------------
+    // ENTREGADO
+    // --------------------------------------
+
+    if (
+      request.estado ===
+      "ENTREGADO A COMERCIAL"
+    ) {
+
+      actions.appendChild(
+        createActionButton(
+          "Registrar devolución",
+          "btn-return",
+          () =>
+            changeStatus(
+              request,
+              "COMERCIAL DEVOLVIÓ"
+            )
+        )
+      );
+
+    }
+
+
+    // --------------------------------------
+    // DEVUELTO
+    // --------------------------------------
+
+    if (
+      request.estado ===
+      "COMERCIAL DEVOLVIÓ"
+    ) {
+
+      actions.appendChild(
+        createActionButton(
+          "Finalizar",
+          "btn-finish",
+          () =>
+            changeStatus(
+              request,
+              "FINALIZADO"
+            )
+        )
+      );
+
+    }
+
+
+    return card;
+
+  }
+
+
+  // ==========================================
+  // BOTÓN DE ACCIÓN
+  // ==========================================
+
+  function createActionButton(
+    text,
+    className,
+    callback
+  ) {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      `action-btn ${className}`;
+
+    button.textContent =
+      text;
+
+    button.addEventListener(
+      "click",
+      callback
+    );
+
+    return button;
+
+  }
+
+
+  // ==========================================
+  // CAMBIAR ESTADO
+  // ==========================================
+
+  async function changeStatus(
+    request,
+    newStatus
+  ) {
+
+    try {
+
+      const user =
+        auth.currentUser;
+
+
+      if (!user) {
+
+        alert(
+          "Tu sesión ha expirado."
+        );
+
+        window.location.href =
+          "index.html";
+
+        return;
+
+      }
+
+
+      const updateData = {
+
+        estado:
+          newStatus,
+
+        responsableOperaciones:
+          user.displayName ||
+          user.email
+
+      };
+
+
+      if (
+        newStatus ===
+        "EN PROCESO"
+      ) {
+
+        updateData.inicioEnProceso =
+          serverTimestamp();
+
+      }
+
+
+      if (
+        newStatus ===
+        "ENTREGADO A COMERCIAL"
+      ) {
+
+        updateData.entregaAComercial =
+          serverTimestamp();
+
+        updateData.responsableEntrega =
+          user.displayName ||
+          user.email;
+
+      }
+
+
+      if (
+        newStatus ===
+        "COMERCIAL DEVOLVIÓ"
+      ) {
+
+        updateData.fechaDevolucion =
+          serverTimestamp();
+
+        updateData.responsableDevolucion =
+          user.displayName ||
+          user.email;
+
+      }
+
+
+      const requestRef =
+        doc(
+          db,
+          "solicitudes",
+          request.id
+        );
+
+
+      await updateDoc(
+        requestRef,
+        updateData
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "No fue posible actualizar la solicitud."
+      );
+
+    }
+
+  }
+
+
+  // ==========================================
+  // SEGURIDAD HTML
+  // ==========================================
+
+  function escapeHtml(value) {
+
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  // ==========================================
+  // ACTUALIZAR CONTADORES
+  // ==========================================
+
+  function updateCounters(requests) {
+
+    const counts = {
+
+      "PENDIENTE": 0,
+
+      "EN PROCESO": 0,
+
+      "ENTREGADO A COMERCIAL": 0,
+
+      "COMERCIAL DEVOLVIÓ": 0,
+
+      "FINALIZADO": 0
+
+    };
+
+
+    requests.forEach(
+      request => {
+
+        if (
+          counts[
+            request.estado
+          ] !== undefined
+        ) {
+
+          counts[
+            request.estado
+          ]++;
+
+        }
+
+      }
+    );
+
+
+    document.getElementById(
+      "countPending"
+    ).textContent =
+      counts["PENDIENTE"];
+
+    document.getElementById(
+      "countProcess"
+    ).textContent =
+      counts["EN PROCESO"];
+
+    document.getElementById(
+      "countDelivered"
+    ).textContent =
+      counts["ENTREGADO A COMERCIAL"];
+
+    document.getElementById(
+      "countReturned"
+    ).textContent =
+      counts["COMERCIAL DEVOLVIÓ"];
+
+    document.getElementById(
+      "countFinished"
+    ).textContent =
+      counts["FINALIZADO"];
+
+
+    document.getElementById(
+      "kanbanPending"
+    ).textContent =
+      counts["PENDIENTE"];
+
+    document.getElementById(
+      "kanbanProcess"
+    ).textContent =
+      counts["EN PROCESO"];
+
+    document.getElementById(
+      "kanbanDelivered"
+    ).textContent =
+      counts["ENTREGADO A COMERCIAL"];
+
+    document.getElementById(
+      "kanbanReturned"
+    ).textContent =
+      counts["COMERCIAL DEVOLVIÓ"];
+
+    document.getElementById(
+      "kanbanFinished"
+    ).textContent =
+      counts["FINALIZADO"];
+
+  }
+
+
+  // ==========================================
+  // RENDER KANBAN
+  // ==========================================
+
+  function renderRequests(requests) {
+
+    const columns = {
+
+      "PENDIENTE":
+        document.getElementById(
+          "pendingColumn"
+        ),
+
+      "EN PROCESO":
+        document.getElementById(
+          "processColumn"
+        ),
+
+      "ENTREGADO A COMERCIAL":
+        document.getElementById(
+          "deliveredColumn"
+        ),
+
+      "COMERCIAL DEVOLVIÓ":
+        document.getElementById(
+          "returnedColumn"
+        ),
+
+      "FINALIZADO":
+        document.getElementById(
+          "finishedColumn"
+        )
+
+    };
+
+
+    Object.values(columns)
+      .forEach(
+        column => {
+          column.innerHTML = "";
+        }
+      );
+
+
+    const ordered =
+      [...requests].sort(
+        (a, b) => {
+
+          const dateA =
+            a.fechaRegistro &&
+            typeof a.fechaRegistro.toDate ===
+            "function"
+              ? a.fechaRegistro.toDate()
+              : new Date(0);
+
+          const dateB =
+            b.fechaRegistro &&
+            typeof b.fechaRegistro.toDate ===
+            "function"
+              ? b.fechaRegistro.toDate()
+              : new Date(0);
+
+          return dateB - dateA;
+
+        }
+      );
+
+
+    ordered.forEach(
+      request => {
+
+        const column =
+          columns[request.estado];
+
+
+        if (!column) {
+          return;
+        }
+
+
+        column.appendChild(
+          createRequestCard(
+            request
+          )
+        );
+
+      }
+    );
+
+
+    Object.entries(columns)
+      .forEach(
+        ([status, column]) => {
+
+          if (
+            column.children.length === 0
+          ) {
+
+            column.innerHTML = `
+              <div class="empty">
+                No hay solicitudes
+              </div>
+            `;
+
+          }
+
+        }
+      );
+
+
+    updateCounters(requests);
+
+  }
+
+
+  // ==========================================
+  // AUTENTICACIÓN
+  // ==========================================
+
+  onAuthStateChanged(
+    auth,
+    async (user) => {
+
+      if (!user) {
+
+        window.location.href =
+          "index.html";
+
+        return;
+
+      }
+
+
+      userName.textContent =
+        user.displayName ||
+        user.email ||
+        "Usuario";
+
+
+      userRole.textContent =
+        "OPERACIONES";
+
+
+      // --------------------------------------
+      // ESCUCHAR SOLICITUDES
+      // --------------------------------------
+
+      const solicitudesRef =
+        collection(
+          db,
+          "solicitudes"
+        );
+
+
+      onSnapshot(
+        solicitudesRef,
+        (snapshot) => {
+
+          const requests =
+            snapshot.docs.map(
+              normalizeRequest
+            );
+
+
+          if (
+            !firstLoad &&
+            snapshot.docChanges()
+              .some(
+                change =>
+                  change.type === "added"
+              )
+          ) {
+
+            playNotificationSound();
+
+          }
+
+
+          firstLoad = false;
+
+
+          renderRequests(
+            requests
+          );
+
+        },
+        (error) => {
+
+          console.error(
+            "Error Firestore:",
+            error
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  // ==========================================
+  // CERRAR SESIÓN
+  // ==========================================
+
+  logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+      try {
+
+        await signOut(auth);
+
+        window.location.href =
+          "index.html";
+
+      } catch (error) {
+
+        console.error(error);
+
+      }
+
+    }
+  );
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NARAN COLOMBIA | Tarjetas y Llaves</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --naran-green: #a8ef4f;
+      --naran-green-dark: #55b82f;
+      --naran-black: #17191a;
+      --naran-dark: #101213;
+      --naran-white: #ffffff;
+      --naran-gray: #667085;
+      --naran-border: #d9dee7;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      background: var(--naran-dark);
+      color: var(--naran-black);
+    }
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      padding: 10px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(80, 190, 55, 0.25), transparent 28%),
+        linear-gradient(135deg, #17191a 0%, #0d0f10 100%);
+    }
+
+    /* =========================
+       PANEL IZQUIERDO
+    ========================= */
+
+    .brand-panel {
+      width: 42%;
+      min-height: calc(100vh - 20px);
+      border-radius: 28px;
+      padding: 60px 70px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+
+      background:
+        radial-gradient(circle at 85% 15%, rgba(74, 190, 50, 0.22), transparent 25%),
+        linear-gradient(145deg, #151819, #090b0c);
+    }
+
+    .brand-panel::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(120, 220, 70, 0.15);
+      border-radius: 50%;
+      right: -220px;
+      top: 45%;
+    }
+
+    .brand-logo {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .brand-name {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -2px;
+    }
+
+    .brand-country {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 7px;
+      margin-top: 2px;
+      color: #d7d9db;
+    }
+
+    .green-line {
+      width: 65px;
+      height: 4px;
+      background: var(--naran-green);
+      border-radius: 10px;
+      margin-top: 42px;
+    }
+
+    .brand-title {
+      position: relative;
+      z-index: 2;
+      font-size: 42px;
+      line-height: 1.12;
+      font-weight: 400;
+      margin-top: 45px;
+      max-width: 430px;
+    }
+
+    .brand-title span {
+      color: var(--naran-green);
+      font-weight: 700;
+    }
+
+    .features {
+      position: relative;
+      z-index: 2;
+      margin-top: 45px;
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 18px;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .brand-footer {
+      position: absolute;
+      bottom: 50px;
+      left: 70px;
+      z-index: 3;
+    }
+
+    .brand-footer strong {
+      display: block;
+      letter-spacing: 5px;
+      font-size: 13px;
+    }
+
+    .brand-footer span {
+      display: block;
+      color: #aeb3b8;
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       PANEL DERECHO
+    ========================= */
+
+    .form-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 690px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 28px;
+      padding: 55px 60px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-brand {
+      text-align: center;
+    }
+
+    .card-brand img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .card-brand h1 {
+      font-size: 25px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .card-brand p {
+      color: #98a0ad;
+      font-size: 12px;
+      letter-spacing: 5px;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 48px;
+      margin-bottom: 35px;
+    }
+
+    .welcome h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: var(--naran-gray);
+      font-size: 17px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .input-group input {
+      width: 100%;
+      height: 64px;
+      border: 1px solid var(--naran-border);
+      border-radius: 14px;
+      padding: 0 55px 0 22px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.2s;
+      background: white;
+    }
+
+    .input-group input:focus {
+      border-color: var(--naran-green-dark);
+      box-shadow: 0 0 0 4px rgba(85, 184, 47, 0.10);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #263142;
+      pointer-events: none;
+    }
+
+    .input-group input {
+      padding-left: 58px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 19px;
+    }
+
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0 28px;
+      font-size: 14px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+    }
+
+    .remember input {
+      width: 20px;
+      height: 20px;
+    }
+
+    .forgot {
+      color: var(--naran-green-dark);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-login {
+      width: 100%;
+      height: 64px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(
+        135deg,
+        var(--naran-green-dark),
+        #4baa2e
+      );
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(76, 170, 46, 0.25);
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 30px 0;
+      color: #98a0ad;
+    }
+
+    .separator::before,
+    .separator::after {
+      content: "";
+      height: 1px;
+      background: #dce1e8;
+      flex: 1;
+    }
+
+    .btn-google {
+      width: 100%;
+      height: 62px;
+      border: 1px solid var(--naran-green-dark);
+      border-radius: 14px;
+      background: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .security {
+      text-align: center;
+      margin-top: 50px;
+      color: #8c96a5;
+      font-size: 14px;
+    }
+
+    .error-message {
+      display: none;
+      background: #fff0f0;
+      border: 1px solid #ffcaca;
+      color: #c62828;
+      padding: 13px 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1050px) {
+      .brand-panel {
+        width: 38%;
+        padding: 45px;
+      }
+
+      .brand-title {
+        font-size: 34px;
+      }
+
+      .form-panel {
+        padding: 30px;
+      }
+
+      .login-card {
+        padding: 45px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .login-page {
+        padding: 0;
+      }
+
+      .brand-panel {
+        display: none;
+      }
+
+      .form-panel {
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .login-card {
+        padding: 35px 25px;
+        border-radius: 22px;
+      }
+
+      .welcome {
+        margin-top: 35px;
+      }
+
+      .welcome h2 {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-page">
+
+    <!-- =========================
+         PANEL NARAN
+    ========================== -->
+
+    <section class="brand-panel">
+
+      <div class="brand-logo">
+
+        <img src="logo.png" alt="NARAN">
+
+        <div>
+          <div class="brand-name">naran</div>
+          <span class="brand-country">COLOMBIA</span>
+        </div>
+
+      </div>
+
+      <div class="green-line"></div>
+
+      <h2 class="brand-title">
+        Movilidad inteligente,
+        <br>
+        operaciones
+        <br>
+        <span>más seguras</span>
+      </h2>
+
+      <div class="features">
+
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <span>Control</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">⌖</div>
+          <span>Monitoreo</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">▥</div>
+          <span>Gestión</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">♧</div>
+          <span>Resultados</span>
+        </div>
+
+      </div>
+
+      <div class="brand-footer">
+        <strong>NARAN COLOMBIA</strong>
+        <span>
+          Tecnología que impulsa
+          <br>
+          tu operación
+        </span>
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <section class="form-panel">
+
+      <div class="login-card">
+
+        <div class="card-brand">
+
+          <img src="logo.png" alt="NARAN COLOMBIA">
+
+          <h1>NARAN COLOMBIA</h1>
+
+          <p>PLATAFORMA DE GESTIÓN</p>
+
+        </div>
+
+
+        <div class="welcome">
+
+          <h2>Bienvenido</h2>
+
+          <p>
+            Inicia sesión para continuar
+          </p>
+
+        </div>
+
+
+        <div id="errorMessage" class="error-message"></div>
+
+
+        <form id="loginForm">
+
+          <div class="input-group">
+
+            <span class="input-icon">✉</span>
+
+            <input
+              type="email"
+              id="email"
+              placeholder="Correo electrónico"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="input-group">
+
+            <span class="input-icon">▣</span>
+
+            <input
+              type="password"
+              id="password"
+              placeholder="Contraseña"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="togglePassword"
+            >
+              ◉
+            </button>
+
+          </div>
+
+
+          <div class="login-options">
+
+            <label class="remember">
+
+              <input
+                type="checkbox"
+                id="remember"
+              >
+
+              <span>Recordarme</span>
+
+            </label>
+
+            <span
+              class="forgot"
+              id="forgotPassword"
+            >
+              ¿Olvidaste tu contraseña?
+            </span>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn-login"
+            id="loginButton"
+          >
+            Iniciar sesión →
+          </button>
+
+        </form>
+
+
+        <div class="separator">
+          <span>o</span>
+        </div>
+
+
+        <button
+          type="button"
+          class="btn-google"
+          id="googleButton"
+        >
+          🌐 &nbsp; Iniciar con Google
+        </button>
+
+
+        <div class="security">
+          🔒 &nbsp; Acceso seguro • NARAN COLOMBIA
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FIREBASE
+  ========================== -->
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    sendPasswordResetEmail,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    getDoc
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+  // ==========================================
+  // CONFIGURACIÓN FIREBASE
+  // ==========================================
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDvDgdjlLhLvkQRIB8vCdY_7q1lu3Bo0Fs",
+    authDomain: "naran-colombia.firebaseapp.com",
+    projectId: "naran-colombia",
+    storageBucket: "naran-colombia.firebasestorage.app",
+    messagingSenderId: "1065998017083",
+    appId: "1:1065998017083:web:b7a2081356f7aed01db21e",
+    measurementId: "G-Y4DDJXRHMG"
+  };
+
+
+  // ==========================================
+  // INICIALIZAR FIREBASE
+  // ==========================================
+
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth(app);
+
+  const db = getFirestore(app);
+
+  const googleProvider = new GoogleAuthProvider();
+
+
+  // ==========================================
+  // ELEMENTOS
+  // ==========================================
+
+  const loginForm = document.getElementById("loginForm");
+
+  const emailInput = document.getElementById("email");
+
+  const passwordInput = document.getElementById("password");
+
+  const rememberInput = document.getElementById("remember");
+
+  const loginButton = document.getElementById("loginButton");
+
+  const googleButton = document.getElementById("googleButton");
+
+  const forgotPassword = document.getElementById("forgotPassword");
+
+  const togglePassword = document.getElementById("togglePassword");
+
+  const errorMessage = document.getElementById("errorMessage");
+
+
+  // ==========================================
+  // MOSTRAR ERROR
+  // ==========================================
+
+  function showError(message) {
+
+    errorMessage.textContent = message;
+
+    errorMessage.style.display = "block";
+
+  }
+
+
+  // ==========================================
+  // OCULTAR ERROR
+  // ==========================================
+
+  function hideError() {
+
+    errorMessage.textContent = "";
+
+    errorMessage.style.display = "none";
+
+  }
+
+
+  // ==========================================
+  // MOSTRAR / OCULTAR CONTRASEÑA
+  // ==========================================
+
+  togglePassword.addEventListener("click", () => {
+
+    if (passwordInput.type === "password") {
+
+      passwordInput.type = "text";
+
+      togglePassword.textContent = "◉";
+
+    } else {
+
+      passwordInput.type = "password";
+
+      togglePassword.textContent = "◉";
+
+    }
+
+  });
+
+
+  // ==========================================
+  // INICIO DE SESIÓN
+  // ==========================================
+
+  loginForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    hideError();
+
+    const email = emailInput.value.trim();
+
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+
+      showError("Por favor completa correo y contraseña.");
+
+      return;
+
+    }
+
+
+    try {
+
+      loginButton.disabled = true;
+
+      loginButton.textContent = "Iniciando sesión...";
+
+
+      // --------------------------------------
+      // RECORDAR SESIÓN
+      // --------------------------------------
+
+      const persistence = rememberInput.checked
+        ? browserLocalPersistence
+        : browserSessionPersistence;
+
+      await setPersistence(auth, persistence);
+
+
+      // --------------------------------------
+      // AUTENTICAR
+      // --------------------------------------
+
+      const userCredential =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      const user = userCredential.user;
+
+
+      // --------------------------------------
+      // BUSCAR USUARIO EN FIRESTORE
+      // --------------------------------------
+
+      const userRef = doc(
+        db,
+        "usuarios",
+        user.uid
+      );
+
+      const userSnapshot = await getDoc(userRef);
+
+
+      if (!userSnapshot.exists()) {
+
+        showError(
+          "El usuario existe en Firebase Authentication, pero no tiene un perfil configurado en NARAN."
+        );
+
+        await auth.signOut();
+
+        return;
+
+      }
+
+
+      const userData = userSnapshot.data();
+
+      const nombre = userData.nombre || "Usuario";
+
+      const rol = userData.rol || "";
+
+
+      console.log("Usuario:", nombre);
+
+      console.log("Rol:", rol);
+
+
+// --------------------------------------
+// REDIRECCIÓN SEGÚN ROL
+// --------------------------------------
+
+if (rol === "OPERACIONES") {
+
+  window.location.href = "operaciones.html";
+
+} else if (rol === "COMERCIAL") {
+
+  window.location.href = "comercial.html";
+
+} else {
+
+  showError(
+    "El usuario no tiene un rol válido configurado."
+  );
+
+  await auth.signOut();
+
+  return;
+
+}
+
+
+      // --------------------------------------
+      // PRÓXIMO PASO
+      // --------------------------------------
+      // Aquí posteriormente enviaremos al usuario
+      // a su pantalla correspondiente:
+      //
+      // COMERCIAL → registro de solicitud
+      // OPERACIONES → tablero de tarjetas y llaves
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      let message =
+        "No fue posible iniciar sesión.";
+
+
+      if (
+        error.code ===
+        "auth/invalid-credential"
+      ) {
+
+        message =
+          "Correo o contraseña incorrectos.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/user-not-found"
+      ) {
+
+        message =
+          "No existe un usuario con este correo.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/wrong-password"
+      ) {
+
+        message =
+          "La contraseña es incorrecta.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/too-many-requests"
+      ) {
+
+        message =
+          "Demasiados intentos. Intenta nuevamente más tarde.";
+
+      }
+
+      else if (
+        error.code ===
+        "auth/network-request-failed"
+      ) {
+
+        message =
+          "No hay conexión con Firebase. Revisa tu conexión a Internet.";
+
+      }
+
+
+      showError(message);
+
+
+    } finally {
+
+      loginButton.disabled = false;
+
+      loginButton.textContent =
+        "Iniciar sesión →";
+
+    }
+
+  });
+
+
+  // ==========================================
+  // INICIAR CON GOOGLE
+  // ==========================================
+
+  googleButton.addEventListener(
+    "click",
+    async () => {
+
+      hideError();
+
+      try {
+
+        await setPersistence(
+          auth,
+          browserSessionPersistence
+        );
+
+        const result =
+          await signInWithPopup(
+            auth,
+            googleProvider
+          );
+
+        const user = result.user;
+
+
+        const userRef = doc(
+          db,
+          "usuarios",
+          user.uid
+        );
+
+        const userSnapshot =
+          await getDoc(userRef);
+
+
+        if (!userSnapshot.exists()) {
+
+          showError(
+            "Tu cuenta de Google está autenticada, pero no tienes un perfil creado en NARAN."
+          );
+
+          await auth.signOut();
+
+          return;
+
+        }
+
+
+        const userData =
+          userSnapshot.data();
+
+
+        alert(
+          "Bienvenido, " +
+          (userData.nombre || user.displayName || "Usuario") +
+          "\n\nRol: " +
+          (userData.rol || "")
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        if (
+          error.code !==
+          "auth/popup-closed-by-user"
+        ) {
+
+          showError(
+            "No fue posible iniciar sesión con Google."
+          );
+
+        }
+
+      }
+
+    }
+  );
+
+
+  // ==========================================
+  // RECUPERAR CONTRASEÑA
+  // ==========================================
+
+  forgotPassword.addEventListener(
+    "click",
+    async () => {
+
+      hideError();
+
+      const email =
+        emailInput.value.trim();
+
+
+      if (!email) {
+
+        showError(
+          "Escribe primero tu correo electrónico."
+        );
+
+        emailInput.focus();
+
+        return;
+
+      }
+
+
+      try {
+
+        await sendPasswordResetEmail(
+          auth,
+          email
+        );
+
+
+        alert(
+          "Te enviamos un enlace para restablecer tu contraseña."
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        if (
+          error.code ===
+          "auth/user-not-found"
+        ) {
+
+          showError(
+            "No existe un usuario con ese correo."
+          );
+
+        } else {
+
+          showError(
+            "No fue posible enviar el correo de recuperación."
+          );
+
+        }
+
+      }
+
+    }
+  );
+
+
+  console.log(
+    "NARAN COLOMBIA - Firebase conectado correctamente"
+  );
+
+</script>
+
+</body>
+</html>

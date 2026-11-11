@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NARAN COLOMBIA | Registro de Solicitud</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    :root {
+
+      --green: #55b82f;
+      --green-light: #a8ef4f;
+
+      --black: #17191a;
+      --dark: #101213;
+
+      --white: #ffffff;
+
+      --background: #f5f7f9;
+
+      --gray: #667085;
+      --border: #d9dee7;
+
+      --danger: #c62828;
+
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(85, 184, 47, 0.10),
+          transparent 25%
+        ),
+        var(--background);
+
+      color: var(--black);
+
+    }
+
+
+    /* =====================================
+       HEADER
+    ====================================== */
+
+    .topbar {
+
+      height: 76px;
+
+      background: var(--black);
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 0 35px;
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,.12);
+
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+    }
+
+
+    .brand img {
+
+      width: 46px;
+      height: 46px;
+
+      object-fit: contain;
+
+      border-radius: 50%;
+
+    }
+
+
+    .brand-title {
+
+      font-size: 19px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    .brand-subtitle {
+
+      font-size: 10px;
+
+      color: #aeb3b8;
+
+      letter-spacing: 4px;
+
+      margin-top: 3px;
+
+    }
+
+
+    .user-area {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+    }
+
+
+    .user-info {
+
+      text-align: right;
+
+    }
+
+
+    .user-name {
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+    }
+
+
+    .user-role {
+
+      font-size: 11px;
+
+      color: var(--green-light);
+
+      letter-spacing: 1px;
+
+      margin-top: 3px;
+
+    }
+
+
+    .logout-btn {
+
+      border: 1px solid
+        rgba(255,255,255,.25);
+
+      background: transparent;
+
+      color: white;
+
+      border-radius: 9px;
+
+      padding: 10px 15px;
+
+      cursor: pointer;
+
+    }
+
+
+    .logout-btn:hover {
+
+      background:
+        rgba(255,255,255,.08);
+
+    }
+
+
+    /* =====================================
+       CONTENEDOR
+    ====================================== */
+
+    .page {
+
+      min-height:
+        calc(100vh - 76px);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 45px 20px;
+
+    }
+
+
+    .content {
+
+      width: 100%;
+
+      max-width: 1050px;
+
+      display: grid;
+
+      grid-template-columns:
+        0.85fr 1.15fr;
+
+      gap: 25px;
+
+    }
+
+
+    /* =====================================
+       PANEL INFORMATIVO
+    ====================================== */
+
+    .info-panel {
+
+      background:
+        linear-gradient(
+          145deg,
+          #17191a,
+          #0b0d0e
+        );
+
+      color: white;
+
+      border-radius: 24px;
+
+      padding: 45px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      min-height: 560px;
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.15);
+
+    }
+
+
+    .info-panel::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 430px;
+
+      height: 430px;
+
+      border-radius: 50%;
+
+      border: 1px solid
+        rgba(168,239,79,.16);
+
+      right: -210px;
+
+      bottom: -120px;
+
+    }
+
+
+    .info-logo {
+
+      width: 65px;
+      height: 65px;
+
+      object-fit: contain;
+
+      border-radius: 50%;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    .green-line {
+
+      width: 55px;
+
+      height: 4px;
+
+      background:
+        var(--green-light);
+
+      border-radius: 20px;
+
+      margin-bottom: 28px;
+
+    }
+
+
+    .info-panel h1 {
+
+      font-size: 34px;
+
+      line-height: 1.15;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .info-panel h1 span {
+
+      color:
+        var(--green-light);
+
+    }
+
+
+    .info-panel p {
+
+      color: #b9bec4;
+
+      font-size: 15px;
+
+      line-height: 1.7;
+
+      max-width: 400px;
+
+    }
+
+
+    .steps {
+
+      margin-top: 45px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 22px;
+
+    }
+
+
+    .step {
+
+      display: flex;
+
+      gap: 15px;
+
+      align-items: center;
+
+    }
+
+
+    .step-number {
+
+      width: 35px;
+      height: 35px;
+
+      border: 1px solid
+        rgba(255,255,255,.35);
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--green-light);
+
+      font-weight: 700;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .step-text {
+
+      font-size: 14px;
+
+      color: #d5d9dd;
+
+    }
+
+
+    .info-footer {
+
+      position: absolute;
+
+      bottom: 35px;
+
+      left: 45px;
+
+      font-size: 11px;
+
+      letter-spacing: 4px;
+
+      color: #9299a1;
+
+    }
+
+
+    /* =====================================
+       FORMULARIO
+    ====================================== */
+
+    .form-card {
+
+      background: white;
+
+      border-radius: 24px;
+
+      padding: 45px;
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.08);
+
+      border: 1px solid
+        var(--border);
+
+    }
+
+
+    .form-header {
+
+      margin-bottom: 35px;
+
+    }
+
+
+    .form-header h2 {
+
+      font-size: 30px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .form-header p {
+
+      color: var(--gray);
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .form-group {
+
+      margin-bottom: 22px;
+
+    }
+
+
+    .form-label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      margin-bottom: 9px;
+
+    }
+
+
+    .required {
+
+      color:
+        var(--green);
+
+    }
+
+
+    .form-input {
+
+      width: 100%;
+
+      height: 58px;
+
+      border: 1px solid
+        var(--border);
+
+      border-radius: 12px;
+
+      padding: 0 17px;
+
+      font-size: 16px;
+
+      outline: none;
+
+      transition: .2s;
+
+      background: white;
+
+    }
+
+
+    .form-input:focus {
+
+      border-color:
+        var(--green);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(85,184,47,.10);
+
+    }
+
+
+    .commercial-display {
+
+      width: 100%;
+
+      min-height: 58px;
+
+      border-radius: 12px;
+
+      background: #f5f7f9;
+
+      border: 1px solid
+        var(--border);
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 0 17px;
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+    }
+
+
+    .commercial-display.loading {
+
+      color: #98a2b3;
+
+      font-weight: 400;
+
+    }
+
+
+    .help {
+
+      display: block;
+
+      margin-top: 7px;
+
+      color: #98a2b3;
+
+      font-size: 11px;
+
+    }
+
+
+    .submit-btn {
+
+      width: 100%;
+
+      height: 62px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          #4baa2e
+        );
+
+      color: white;
+
+      font-size: 17px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      margin-top: 12px;
+
+      transition: .2s;
+
+    }
+
+
+    .submit-btn:hover {
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 10px 25px
+        rgba(76,170,46,.25);
+
+    }
+
+
+    .submit-btn:disabled {
+
+      opacity: .65;
+
+      cursor: not-allowed;
+
+      transform: none;
+
+      box-shadow: none;
+
+    }
+
+
+    .message {
+
+      display: none;
+
+      padding: 14px 16px;
+
+      border-radius: 10px;
+
+      margin-bottom: 20px;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .message.success {
+
+      display: block;
+
+      background: #f0fdf4;
+
+      border: 1px solid #bbf7d0;
+
+      color: #166534;
+
+    }
+
+
+    .message.error {
+
+      display: block;
+
+      background: #fff0f0;
+
+      border: 1px solid #ffcaca;
+
+      color: var(--danger);
+
+    }
+
+
+    .status-info {
+
+      margin-top: 22px;
+
+      padding-top: 20px;
+
+      border-top: 1px solid
+        var(--border);
+
+      color: var(--gray);
+
+      font-size: 12px;
+
+      text-align: center;
+
+    }
+
+
+    .status-info strong {
+
+      color: var(--black);
+
+    }
+
+
+    /* =====================================
+       RESPONSIVE
+    ====================================== */
+
+    @media (max-width: 850px) {
+
+      .content {
+
+        grid-template-columns: 1fr;
+
+        max-width: 650px;
+
+      }
+
+
+      .info-panel {
+
+        min-height: auto;
+
+        padding: 35px;
+
+      }
+
+
+      .info-footer {
+
+        position: static;
+
+        margin-top: 40px;
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .topbar {
+
+        padding: 0 15px;
+
+      }
+
+
+      .user-info {
+
+        display: none;
+
+      }
+
+
+      .page {
+
+        padding: 25px 15px;
+
+      }
+
+
+      .form-card {
+
+        padding: 30px 22px;
+
+      }
+
+
+      .info-panel {
+
+        padding: 30px 25px;
+
+      }
+
+
+      .info-panel h1 {
+
+        font-size: 29px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ===================================
+       HEADER
+  ==================================== -->
+
+  <header class="topbar">
+
+    <div class="brand">
+
+      <img
+        src="logo.png"
+        alt="NARAN"
+      >
+
+      <div>
+
+        <div class="brand-title">
+          NARAN COLOMBIA
+        </div>
+
+        <div class="brand-subtitle">
+          TARJETAS Y LLAVES
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="user-area">
+
+      <div class="user-info">
+
+        <div
+          class="user-name"
+          id="userName"
+        >
+          Cargando...
+        </div>
+
+        <div class="user-role">
+          COMERCIAL
+        </div>
+
+      </div>
+
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+      >
+        Cerrar sesión
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ===================================
+       CONTENIDO
+  ==================================== -->
+
+  <main class="page">
+
+    <div class="content">
+
+
+      <!-- =================================
+           INFORMACIÓN
+      ================================== -->
+
+      <section class="info-panel">
+
+        <img
+          class="info-logo"
+          src="logo.png"
+          alt="NARAN COLOMBIA"
+        >
+
+
+        <div class="green-line"></div>
+
+
+        <h1>
+          Solicita tus
+          <br>
+          <span>tarjetas y llaves</span>
+        </h1>
+
+
+        <p>
+
+          Registra la solicitud para que
+          Operaciones pueda preparar y
+          entregar la documentación
+          correspondiente a la motocicleta.
+
+        </p>
+
+
+        <div class="steps">
+
+          <div class="step">
+
+            <div class="step-number">
+              1
+            </div>
+
+            <div class="step-text">
+              Registra la placa de la motocicleta.
+            </div>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">
+              2
+            </div>
+
+            <div class="step-text">
+              Confirma la fecha prevista de entrega.
+            </div>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">
+              3
+            </div>
+
+            <div class="step-text">
+              Operaciones recibirá la solicitud inmediatamente.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-footer">
+          NARAN COLOMBIA
+        </div>
+
+      </section>
+
+
+      <!-- =================================
+           FORMULARIO
+      ================================== -->
+
+      <section class="form-card">
+
+
+        <div class="form-header">
+
+          <h2>
+            Nueva solicitud
+          </h2>
+
+          <p>
+            Completa los datos para solicitar
+            la tarjeta de propiedad y las llaves.
+          </p>
+
+        </div>
+
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+
+        <form id="requestForm">
+
+
+          <!-- PLACA -->
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="placa"
+            >
+              PLACA
+              <span class="required">*</span>
+            </label>
+
+
+            <input
+              type="text"
+              id="placa"
+              class="form-input"
+              placeholder="Ej: ABC123"
+              maxlength="10"
+              autocomplete="off"
+              required
+            >
+
+
+            <span class="help">
+              Ingresa la placa tal como aparece en la motocicleta.
+            </span>
+
+          </div>
+
+
+          <!-- COMERCIAL -->
+
+          <div class="form-group">
+
+            <label class="form-label">
+              COMERCIAL
+            </label>
+
+
+            <div
+              id="commercialName"
+              class="commercial-display loading"
+            >
+              Cargando usuario...
+            </div>
+
+
+            <span class="help">
+              Este nombre se obtiene automáticamente de tu cuenta.
+            </span>
+
+          </div>
+
+
+          <!-- FECHA ENTREGA -->
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="fechaEntrega"
+            >
+              FECHA DE ENTREGA
+              <span class="required">*</span>
+            </label>
+
+
+            <input
+              type="datetime-local"
+              id="fechaEntrega"
+              class="form-input"
+              required
+            >
+
+
+            <span class="help">
+              Indica cuándo está prevista la entrega al comercial.
+            </span>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="submit-btn"
+            id="submitButton"
+          >
+            Registrar solicitud →
+          </button>
+
+
+        </form>
+
+
+        <div class="status-info">
+
+          Estado inicial:
+          <strong>PENDIENTE</strong>
+
+          <br>
+
+          La fecha y hora de registro
+          se guardarán automáticamente.
+
+        </div>
+
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- ===================================
+       FIREBASE
+  ==================================== -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    } from
+      "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from
+      "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      collection,
+      addDoc,
+      serverTimestamp
+    } from
+      "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+
+    // =====================================
+    // CONFIGURACIÓN FIREBASE
+    // =====================================
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyDvDgdjlLhLvkQRIB8vCdY_7q1lu3Bo0Fs",
+
+      authDomain:
+        "naran-colombia.firebaseapp.com",
+
+      projectId:
+        "naran-colombia",
+
+      storageBucket:
+        "naran-colombia.firebasestorage.app",
+
+      messagingSenderId:
+        "1065998017083",
+
+      appId:
+        "1:1065998017083:web:b7a2081356f7aed01db21e",
+
+      measurementId:
+        "G-Y4DDJXRHMG"
+
+    };
+
+
+    // =====================================
+    // INICIALIZAR
+    // =====================================
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const db =
+      getFirestore(app);
+
+
+    // =====================================
+    // ELEMENTOS
+    // =====================================
+
+    const userName =
+      document.getElementById(
+        "userName"
+      );
+
+
+    const commercialName =
+      document.getElementById(
+        "commercialName"
+      );
+
+
+    const logoutBtn =
+      document.getElementById(
+        "logoutBtn"
+      );
+
+
+    const requestForm =
+      document.getElementById(
+        "requestForm"
+      );
+
+
+    const placaInput =
+      document.getElementById(
+        "placa"
+      );
+
+
+    const fechaEntregaInput =
+      document.getElementById(
+        "fechaEntrega"
+      );
+
+
+    const submitButton =
+      document.getElementById(
+        "submitButton"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    // =====================================
+    // USUARIO ACTUAL
+    // =====================================
+
+    let currentUser = null;
+
+    let currentUserData = null;
+
+
+    // =====================================
+    // MENSAJE
+    // =====================================
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function hideMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    // =====================================
+    // AUTENTICACIÓN
+    // =====================================
+
+    onAuthStateChanged(
+      auth,
+      async (user) => {
+
+        if (!user) {
+
+          window.location.href =
+            "index.html";
+
+          return;
+
+        }
+
+
+        currentUser = user;
+
+
+        userName.textContent =
+          user.email ||
+          "Usuario";
+
+
+        try {
+
+          const userRef =
+            doc(
+              db,
+              "usuarios",
+              user.uid
+            );
+
+
+          const userSnapshot =
+            await getDoc(
+              userRef
+            );
+
+
+          if (
+            !userSnapshot.exists()
+          ) {
+
+            showMessage(
+              "Tu usuario no tiene un perfil configurado en NARAN.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          currentUserData =
+            userSnapshot.data();
+
+
+          const nombre =
+            currentUserData.nombre ||
+            user.email ||
+            "Usuario";
+
+
+          const rol =
+            currentUserData.rol ||
+            "";
+
+
+          userName.textContent =
+            nombre;
+
+
+          commercialName.textContent =
+            nombre;
+
+          commercialName.classList.remove(
+            "loading"
+          );
+
+
+          /*
+            Por seguridad, esta pantalla
+            debe ser utilizada por usuarios
+            con rol COMERCIAL.
+          */
+
+          if (
+            rol !== "COMERCIAL"
+          ) {
+
+            showMessage(
+              "Este usuario no tiene el rol COMERCIAL.",
+              "error"
+            );
+
+            submitButton.disabled =
+              true;
+
+          }
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "No fue posible cargar tu perfil.",
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+    // =====================================
+    // PLACA
+    // =====================================
+
+    placaInput.addEventListener(
+      "input",
+      () => {
+
+        placaInput.value =
+          placaInput.value
+            .toUpperCase()
+            .replace(
+              /\s/g,
+              ""
+            );
+
+      }
+    );
+
+
+    // =====================================
+    // CERRAR SESIÓN
+    // =====================================
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await signOut(auth);
+
+          window.location.href =
+            "index.html";
+
+        } catch (error) {
+
+          console.error(error);
+
+        }
+
+      }
+    );
+
+
+    // =====================================
+    // REGISTRAR SOLICITUD
+    // =====================================
+
+    requestForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        if (!currentUser) {
+
+          showMessage(
+            "Tu sesión no está disponible.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          !currentUserData ||
+          currentUserData.rol !==
+            "COMERCIAL"
+        ) {
+
+          showMessage(
+            "No tienes permisos para registrar solicitudes.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const placa =
+          placaInput.value
+            .trim()
+            .toUpperCase();
+
+
+        const fechaEntrega =
+          fechaEntregaInput.value;
+
+
+        if (!placa) {
+
+          showMessage(
+            "Ingresa la placa.",
+            "error"
+          );
+
+          placaInput.focus();
+
+          return;
+
+        }
+
+
+        if (!fechaEntrega) {
+
+          showMessage(
+            "Selecciona la fecha de entrega.",
+            "error"
+          );
+
+          fechaEntregaInput.focus();
+
+          return;
+
+        }
+
+
+        try {
+
+          submitButton.disabled =
+            true;
+
+          submitButton.textContent =
+            "Registrando solicitud...";
+
+
+          // =================================
+          // CREAR SOLICITUD
+          // =================================
+
+          await addDoc(
+            collection(
+              db,
+              "solicitudes"
+            ),
+            {
+
+              placa:
+                placa,
+
+              comercial:
+                currentUserData.nombre ||
+                currentUser.email,
+
+              fechaEntrega:
+                new Date(fechaEntrega),
+
+              fechaRegistro:
+                serverTimestamp(),
+
+              estado:
+                "PENDIENTE"
+
+            }
+          );
+
+
+          // =================================
+          // ÉXITO
+          // =================================
+
+          showMessage(
+            "Solicitud registrada correctamente. Operaciones ya puede verla en tiempo real.",
+            "success"
+          );
+
+
+          requestForm.reset();
+
+
+          placaInput.focus();
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showMessage(
+            "No fue posible registrar la solicitud. Intenta nuevamente.",
+            "error"
+          );
+
+        } finally {
+
+          submitButton.disabled =
+            false;
+
+          submitButton.textContent =
+            "Registrar solicitud →";
+
+        }
+
+      }
+    );
+
+
+  </script>
+
+</body>
+
+</html> 
